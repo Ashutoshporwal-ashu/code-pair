@@ -1,68 +1,135 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;700&display=swap');
+
+/* Global Variables */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --primary: #4aed88;     /* Neon Green */
+  --primary-hover: #36bd68; /* Darker Green for hover */
+  --bg-dark: #1c1e29;     /* Deep Dark Background */
+  --bg-light: #282a36;    /* Card Background */
+  --text-main: #fff;
+  --text-secondary: #eee;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: 'Sora', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* === Button Style === */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.3s ease; /* Smooth transition add ki */
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* === Home Page Specific Styles === */
+/* (Ye humne pehle App.css mein socha tha par abhi yahi rakh rahe hain simple rakhne ke liye) */
+
+.homePageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-main);
+    height: 100vh;
+}
+
+.formWrapper {
+    background: var(--bg-light);
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    max-width: 90%;
+    /* Thoda shadow diya taaki utha hua lage */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.homePageLogo {
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.mainLabel {
+    margin-bottom: 20px;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+.inputBox {
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid #424242; /* Default border */
+    background: #393b47;
+    color: var(--text-secondary);
+    font-weight: bold;
+    margin-bottom: 14px;
+    transition: all 0.3s ease;
+}
+
+/* ✨ FINISHING TOUCH: Jab input par click karein */
+.inputBox:focus {
+    border-color: var(--primary); /* Border neon green ho jayegi */
+    background: #414452;
+}
+
+.joinBtn {
+    background: var(--primary);
+    width: 100px;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #000; /* Black text on green button */
+    margin-left: auto;
+}
+
+/* ✨ FINISHING TOUCH: Join button par hover */
+.joinBtn:hover {
+    background: var(--primary-hover); /* Thoda dark green ho jayega */
+}
+
+.createInfo {
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.createNewBtn {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary);
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+/* ✨ FINISHING TOUCH: 'New Room' link par hover */
+.createNewBtn:hover {
+    border-bottom-color: transparent; /* Line gayab ho jayegi */
+    color: var(--primary-hover);
+}
+
+footer {
+    position: fixed;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    color: #797a82;
+}
+
+footer a {
+    color: var(--primary);
+    text-decoration: none;
 }
