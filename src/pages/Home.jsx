@@ -6,43 +6,65 @@ import { useNavigate } from 'react-router-dom';
 const Home = () => {
     const navigate = useNavigate();
 
-    // Ye data store karega
     const [roomId, setRoomId] = useState('');
     const [username, setUsername] = useState('');
 
-    // Naya Room ID generate karne ka function
     const createNewRoom = (e) => {
-        e.preventDefault(); // Page reload hone se rokega
-        const id = uuidv4(); // Nayi unique ID banayi
-        setRoomId(id); // Input box mein daal di
-        toast.success('Created a new room'); // Notification dikhaya
+        e.preventDefault();
+        const id = uuidv4();
+        setRoomId(id);
+        toast.success('Created a new room');
     };
 
-    // Join button dabane par kya hoga
     const joinRoom = () => {
         if (!roomId || !username) {
             toast.error('ROOM ID & Username is required');
             return;
         }
 
-        // Editor page par le jao (Navigation)
+        // ✨ UPDATE 1: Username ko Local Storage mein save kiya
+        // Taki agar Editor page refresh ho, toh humein username yaad rahe
+        localStorage.setItem('savedUsername', username);
+
+        // Editor page par navigation
         navigate(`/editor/${roomId}`, {
             state: {
-                username, // Saath mein username bhi le jao
+                username,
             },
         });
     };
 
-    // Agar user "Enter" button dabaye tab bhi join ho jaye
     const handleInputEnter = (e) => {
         if (e.code === 'Enter') {
             joinRoom();
         }
     };
 
+    // ✨ UPDATE 2: Logout Function
+    const logout = () => {
+        localStorage.removeItem('savedUsername'); // Purana data saaf
+        navigate('/login'); // Wapas login page par
+        toast.success('Logged out successfully');
+    }
+
     return (
         <div className="homePageWrapper">
             <div className="formWrapper">
+                {/* Logout Button (Optional: Top right of card) */}
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                     <button 
+                        onClick={logout} 
+                        style={{ 
+                            background: 'transparent', 
+                            color: '#e74c3c', // Red color for logout
+                            fontSize: '12px', 
+                            fontWeight: 'bold',
+                            padding: '0'
+                        }}>
+                        Logout
+                     </button>
+                </div>
+
                 <img
                     className="homePageLogo"
                     src="/code-sync.png"

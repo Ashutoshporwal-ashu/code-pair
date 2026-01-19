@@ -28,12 +28,10 @@ body {
 button {
   border: none;
   cursor: pointer;
-  transition: all 0.3s ease; /* Smooth transition add ki */
+  transition: all 0.3s ease;
 }
 
 /* === Home Page Specific Styles === */
-/* (Ye humne pehle App.css mein socha tha par abhi yahi rakh rahe hain simple rakhne ke liye) */
-
 .homePageWrapper {
     display: flex;
     align-items: center;
@@ -48,7 +46,6 @@ button {
     border-radius: 10px;
     width: 400px;
     max-width: 90%;
-    /* Thoda shadow diya taaki utha hua lage */
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
@@ -72,7 +69,7 @@ button {
     padding: 10px;
     border-radius: 5px;
     outline: none;
-    border: 2px solid #424242; /* Default border */
+    border: 2px solid #424242;
     background: #393b47;
     color: var(--text-secondary);
     font-weight: bold;
@@ -80,9 +77,8 @@ button {
     transition: all 0.3s ease;
 }
 
-/* ✨ FINISHING TOUCH: Jab input par click karein */
 .inputBox:focus {
-    border-color: var(--primary); /* Border neon green ho jayegi */
+    border-color: var(--primary);
     background: #414452;
 }
 
@@ -92,13 +88,12 @@ button {
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;
-    color: #000; /* Black text on green button */
+    color: #000;
     margin-left: auto;
 }
 
-/* ✨ FINISHING TOUCH: Join button par hover */
 .joinBtn:hover {
-    background: var(--primary-hover); /* Thoda dark green ho jayega */
+    background: var(--primary-hover);
 }
 
 .createInfo {
@@ -114,9 +109,8 @@ button {
     font-weight: bold;
 }
 
-/* ✨ FINISHING TOUCH: 'New Room' link par hover */
 .createNewBtn:hover {
-    border-bottom-color: transparent; /* Line gayab ho jayegi */
+    border-bottom-color: transparent;
     color: var(--primary-hover);
 }
 
@@ -132,4 +126,99 @@ footer {
 footer a {
     color: var(--primary);
     text-decoration: none;
+}
+
+/* ============ EDITOR PAGE STYLES (UPDATED) ============ */
+
+.mainWrap {
+    display: flex;
+    height: 100vh;
+}
+
+.aside {
+    background: #1c1e29;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    border-right: 1px solid #424242;
+    overflow-x: hidden; /* Resize ke waqt content bahar na nikle */
+}
+
+.asideInner {
+    flex: 1;
+    overflow-y: auto; /* Users zyada hone par scrollbar aa jayega */
+}
+
+.logo {
+    border-bottom: 1px solid #424242;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Logo center mein rahega */
+}
+
+.logoImage {
+    width: 60px;        /* Neater size */
+    height: 60px;
+    border-radius: 50%; /* Circle shape */
+    object-fit: cover;
+    border: 2px solid #424242;
+}
+
+.clientsList {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.client {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.userName {
+    margin-top: 10px;
+    font-size: 14px;
+    max-width: 80px;      /* Naam limit kiya */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Lamba naam hone par '...' dikhayega */
+    white-space: nowrap;
+    text-align: center;
+}
+
+.editorWrap {
+    flex: 1;
+}
+
+/* Resizable Gutter (Handle) */
+.gutter {
+    background-color: #282a36;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+
+.gutter.gutter-horizontal {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZgmwIA6J85e/7X98MAAAAASUVORK5CYII=');
+    cursor: col-resize;
+}
+
+/* Button Fixes for Sidebar */
+.copyBtn {
+    background: #fff;
+    color: #333;
+    width: 100%; /* Expand nahi hoga, sidebar width tak rahega */
+    margin-top: 10px;
+}
+
+.leaveBtn {
+    background: #4aed88;
+    color: #000;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
