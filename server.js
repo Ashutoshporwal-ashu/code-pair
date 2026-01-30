@@ -5,6 +5,17 @@ import { ACTIONS } from './src/Actions.js';
 
 const app = express();
 const server = http.createServer(app);
+
+// ✨ JSON data padhne ke liye zaroori hai
+app.use(express.json());
+
+// ✨ Browser security (CORS) error hatane ke liye
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 const io = new Server(server, {
     cors: {
         origin: '*',
@@ -25,8 +36,23 @@ function getAllConnectedClients(roomId) {
     );
 }
 
+// ✨ API: Check agar Room Exist karta hai
+app.get('/rooms/:roomId', (req, res) => {
+    const { roomId } = req.params;
+    const room = io.sockets.adapter.rooms.get(roomId);
+    
+    // Agar room hai aur usme log hain -> exists: true
+    if (room && room.size > 0) {
+        return res.status(200).json({ exists: true });
+    }
+    
+    // Agar room nahi hai -> exists: false
+    return res.status(200).json({ exists: false });
+});
+
+
 io.on('connection', (socket) => {
-    console.log('Socket connected', socket.id);
+    // console.log('Socket connected', socket.id);
 
     // 1. JOIN LOGIC
     socket.on(ACTIONS.JOIN, ({ roomId, username }) => {
@@ -45,7 +71,6 @@ io.on('connection', (socket) => {
 
     // 2. CODE CHANGE LOGIC
     socket.on(ACTIONS.CODE_CHANGE, ({ roomId, code }) => {
-        // Console log hata diya taaki terminal saaf rahe
         socket.in(roomId).emit(ACTIONS.CODE_CHANGE, { code });
     });
 
@@ -54,9 +79,8 @@ io.on('connection', (socket) => {
         io.to(socketId).emit(ACTIONS.CODE_CHANGE, { code });
     });
 
-    // ✨ 4. CHAT MESSAGE LOGIC (Ye Naya Hai)
+    // 4. CHAT MESSAGE LOGIC
     socket.on(ACTIONS.SEND_MESSAGE, ({ roomId, message, username }) => {
-        // Message poore room mein bhejo (including sender)
         io.to(roomId).emit(ACTIONS.RECEIVE_MESSAGE, {
             username,
             message,
