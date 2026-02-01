@@ -36,7 +36,7 @@ const EditorPage = () => {
     const [unreadCount, setUnreadCount] = useState(0);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     
-    // ✨ FIX: Mobile Detection
+    // Mobile Detection
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
     const username = location.state?.username || localStorage.getItem('savedUsername');
@@ -49,7 +49,7 @@ const EditorPage = () => {
         c: "10.2.0",
     };
 
-    // ✨ Screen Resize Listener
+    // Screen Resize Listener
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth < 768);
@@ -193,7 +193,7 @@ const EditorPage = () => {
 
     if (!username) return <Navigate to="/" />;
 
-    // ✨ Component for Sidebar (Reused in Desktop Split & Mobile Menu)
+    // Component for Sidebar (Reused in Desktop Split & Mobile Menu)
     const SidebarContent = () => (
         <div className="flex flex-col h-full">
             <div className="flex-1 p-4 overflow-y-auto custom-scrollbar">
@@ -218,7 +218,7 @@ const EditorPage = () => {
         </div>
     );
 
-    // ✨ Component for Editor Area (Right Side)
+    // Component for Editor Area (Right Side)
     const EditorArea = (
         <div className="flex flex-col h-full bg-dark w-full">
             <Split
@@ -274,7 +274,14 @@ const EditorPage = () => {
                                 if (isIncomingChange.current) return;
                                 socketRef.current.emit(ACTIONS.CODE_CHANGE, { roomId, code: value });
                             }}
-                            options={{ minimap: { enabled: false }, fontSize: 16, padding: { top: 20 }, fontFamily: 'Fira Code, monospace' }}
+                            // ✨ FIX: Added strict font family for Fira Code
+                            options={{ 
+                                minimap: { enabled: false }, 
+                                fontSize: 16, 
+                                padding: { top: 20 }, 
+                                fontFamily: '"Fira Code", monospace', // <--- THIS FIXED THE CURSOR
+                                fontLigatures: true
+                            }}
                         />
                     </div>
                 </div>
@@ -306,7 +313,7 @@ const EditorPage = () => {
 
     return (
         <div className="h-screen bg-gray-900 text-white flex overflow-hidden">
-            {/* ✨ LOGIC: Agar Mobile hai toh sirf Editor dikhao, Split mat karo */}
+            {/* Logic: Mobile shows only Editor, Desktop shows Split */}
             {isMobile ? (
                 <>
                     {EditorArea}
@@ -327,7 +334,7 @@ const EditorPage = () => {
                 </Split>
             )}
 
-            {/* ✨ MOBILE MENU OVERLAY */}
+            {/* MOBILE MENU OVERLAY */}
             {isMobileMenuOpen && (
                 <div className="fixed inset-0 z-50 bg-black/80 md:hidden flex justify-start">
                     <div className="bg-darker w-3/4 max-w-xs h-full p-4 flex flex-col shadow-2xl animate-slide-in border-r border-gray-700">
@@ -335,7 +342,6 @@ const EditorPage = () => {
                              <h3 className="font-bold text-accent text-lg">Menu</h3>
                              <button onClick={toggleMobileMenu} className="text-gray-400 hover:text-white text-2xl">✕</button>
                         </div>
-                        {/* Reuse Sidebar Content Logic */}
                         <div className="flex-1 overflow-y-auto">
                             <h3 className="font-bold text-gray-400 mb-4 uppercase tracking-wider text-xs">Connected Users</h3>
                             <div className="grid grid-cols-3 gap-3 mb-6">

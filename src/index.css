@@ -2,34 +2,135 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✨ Global Body Reset: White Border Fix */
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #111827; /* Dark Grey (Gray-900 match) */
-    overflow-x: hidden;
+/* 🛑 ULTIMATE STABILIZER: Box Sizing Fix */
+*, *::before, *::after {
+    box-sizing: border-box;
 }
 
-/* Custom Scrollbar */
+/* Global Lock */
+html, body, #root {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; 
+    background-color: #0a0a0a;
+    overscroll-behavior: none;
+    position: fixed; 
+    top: 0;
+    left: 0;
+}
+
+/* 🖱️ Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
+    height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #0f0f0f;
+    background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-    background: #4b5563;
+    background: #333;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #4aed88; /* Accent Color */
+    background: #8b5cf6;
 }
 
-/* Mobile Optimization: Hide Split Gutter on small screens */
+/* 🖱️ SPLIT HANDLES (GUTTER) */
+.gutter {
+    background-color: #0a0a0a;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    z-index: 1;  /* ✨ CHANGE: 50 se 1 kar diya, ab ye Chat ke peeche rahega */
+    flex-shrink: 0; 
+}
+
+/* Horizontal Handle (Sidebar ↔ Editor) */
+.gutter.gutter-horizontal {
+    cursor: col-resize;
+    width: 10px !important; 
+    margin: 0 -1px; 
+    border: none; /* ✨ CHANGE: Border hata di */
+    /* Dots rakhe hain taaki pata chale resize kar sakte hain */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJREFUsErkJggg==');
+}
+
+/* Vertical Handle (Editor ↕ Output) */
+.gutter.gutter-vertical {
+    cursor: row-resize;
+    height: 10px !important;
+    margin: -1px 0;
+    border: none; /* ✨ CHANGE: Border hata di */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABoV865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
+}
+
+/* ✨ CHANGE: Hover effect hata diya taaki koi color na dikhe */
+.gutter:hover {
+    background-color: transparent;
+    box-shadow: none;
+}
+
 @media (max-width: 768px) {
     .gutter {
         display: none !important;
+    }
+}
+
+/* ... Upar ka code same ... */
+
+/* 🌌 BACKGROUND ANIMATIONS */
+
+/* 1. Grid Pattern */
+.bg-grid {
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    mask-image: linear-gradient(to bottom, black 20%, transparent 100%);
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+/* 2. Container */
+.particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1; 
+    pointer-events: none;
+}
+
+/* 3. ✨ BOLD GLOWING SQUARE */
+.square-particle {
+    position: absolute;
+    bottom: -50px;
+    /* ✨ CHANGE: Color thoda dark/solid kiya (0.6 opacity) */
+    background: rgba(139, 92, 246, 0.6); 
+    /* ✨ CHANGE: Glow badha di (20px blur, full opacity) */
+    box-shadow: 0 0 20px rgba(139, 92, 246, 1); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px; 
+    animation: float-up-square linear infinite;
+}
+
+/* 4. Animation */
+@keyframes float-up-square {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* ✨ CHANGE: Ekdum bright dikhega */
+    }
+    90% {
+        opacity: 0.5; /* Upar jate waqt bhi dikhta rahega */
+    }
+    100% {
+        transform: translateY(-120vh) rotate(180deg);
+        opacity: 0;
     }
 }
