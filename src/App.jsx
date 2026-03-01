@@ -1,76 +1,63 @@
 import './App.css';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import { Toaster } from 'react-hot-toast';
 import Home from './pages/Home';
 import EditorPage from './pages/EditorPage';
-// ✨ Naya Import: Framer Motion se AnimatePresence
-import { AnimatePresence } from 'framer-motion';
 
 function App() {
-  // ✨ Location hook taaki pata chale page kab change hua
-  const location = useLocation();
-
   return (
     <>
       <div>
-        {/* ✨ CUSTOM DARK TOASTS START */}
+        {/* 🍏 ✨ iOS STYLE TOAST NOTIFICATIONS */}
         <Toaster
-            position="top-right"
+            position="top-center" // iOS ki tarah upar se aayega
+            reverseOrder={false}
             toastOptions={{
-                // Default Options
-                className: '',
+                // Default animation duration
+                duration: 3000,
+                // Custom CSS for that smooth Apple Glassmorphism look
                 style: {
-                    background: '#0f0f0f', // Dark Background
-                    color: '#fff',         // White Text
-                    border: '1px solid #7c3aed', // Purple Border
-                    padding: '16px',
-                    borderRadius: '10px',
-                    boxShadow: '0 0 10px rgba(124, 58, 237, 0.3)', // Halki Purple Glow
-                    fontFamily: 'monospace', // Techy Font
+                    background: 'rgba(25, 25, 25, 0.85)', // Translucent Dark Gray
+                    backdropFilter: 'blur(16px)', // ✨ Frosted Glass Effect
+                    WebkitBackdropFilter: 'blur(16px)', // Safari support
+                    color: '#ffffff',
+                    border: '1px solid rgba(255, 255, 255, 0.08)', // Halka sa white border
+                    borderRadius: '100px', // ✨ Pill Shape (Capsule)
+                    padding: '12px 24px',
+                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)', // Soft floating shadow
                     fontSize: '14px',
+                    fontWeight: '500',
+                    letterSpacing: '0.3px',
                 },
                 
-                // Success Messages (Green/Purple Icon)
+                // Success Messages (iOS Green Icon)
                 success: {
-                    theme: {
-                        primary: '#4ade80', // Bright Green
-                        secondary: 'black',
-                    },
                     iconTheme: {
-                        primary: '#4ade80',
-                        secondary: '#0f0f0f',
+                        primary: '#34C759', // Official iOS Green
+                        secondary: '#111',
                     },
                 },
 
-                // Error Messages (Red Icon)
+                // Error Messages (iOS Red Icon)
                 error: {
-                    style: {
-                        border: '1px solid #000000', // Red Border for Errors
-                        boxShadow: '0 0 10px rgba(106, 42, 146, 0.83)',
-                    },
                     iconTheme: {
-                        primary: '#000000',
-                        secondary: '#7c44ad',
+                        primary: '#FF3B30', // Official iOS Red
+                        secondary: '#fff',
                     },
                 },
             }}
         />
-        {/* ✨ CUSTOM DARK TOASTS END */}
       </div>
       
-      {/* ✨ AnimatePresence ko wrap kiya Routes ke bahar. 
-          mode="wait" ka matlab: pehla page jane do, phir naya lao. */}
-      <AnimatePresence mode="wait">
-        {/* ✨ location aur key add kiya taaki Framer ko pata chale route change hua */}
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/editor/:roomId" element={<EditorPage />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-        </Routes>
-      </AnimatePresence>
+      {/* ROUTES */}
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/editor/:roomId" element={<EditorPage />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/signup" element={<Signup />}></Route>
+      </Routes>
     </>
   );
 }
