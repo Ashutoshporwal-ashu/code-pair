@@ -1,16 +1,53 @@
-# React + Vite
+# ⚡ Code Sync - Real-Time Collaborative Editor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Code Sync Banner](https://via.placeholder.com/1200x400.png?text=Code+Sync+-+Code.+Sync.+Ship.)
 
-Currently, two official plugins are available:
+**Code Sync** is a high-performance, real-time collaborative code editor built for developers, interviewers, and peers to write, compile, and discuss code seamlessly. Featuring a premium OLED dark theme, live floating cursors, and an integrated remote code execution engine.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## ✨ Features That Stand Out
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **👨‍💻 Real-Time Collaboration:** Millisecond-latency code syncing across multiple clients.
+- **🖱️ Live Floating Cursors:** Figma-style live cursors with neon name tags to track peer movements.
+- **🚀 Remote Code Execution:** Instantly compile and run code in multiple languages (C++, Java, Python, JavaScript) directly from the browser.
+- **💬 Integrated Group Chat:** Real-time messaging within the coding room to discuss logic and algorithms.
+- **🎨 Premium OLED UI:** Glassmorphism effects, neon gradients, and typewriter animations for a top-tier developer experience.
+- **🔒 Secure Rooms:** Unique Room IDs ensure your coding sessions remain private and distraction-free.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack & Architecture
+
+### **Frontend**
+- **Library:** React.js (Hooks, Context API)
+- **Styling:** Tailwind CSS (Custom OLED theme, Animations)
+- **Editor Core:** Microsoft Monaco Editor (`@monaco-editor/react`)
+- **Routing:** React Router DOM
+
+### **Backend**
+- **Runtime:** Node.js
+- **Framework:** Express.js
+- **WebSockets:** Socket.io (For real-time bi-directional communication)
+- **Execution Engine:** Piston API / Docker (Isolated code execution)
+
+---
+
+## 📸 Sneak Peek (Screenshots)
+
+*(Add your actual screenshots here by replacing the links)*
+
+| Join Room (OLED Theme) | Editor Workspace |
+| :---: | :---: |
+| ![Join Room](https://via.placeholder.com/400x250.png?text=Login+Screen) | ![Editor](https://via.placeholder.com/400x250.png?text=Editor+Workspace) |
+
+---
+
+## 🚀 Run It Locally (Installation Guide)
+
+Want to test it out on your own machine? Follow these steps:
+
+**1. Clone the repository:**
+```bash
+git clone [https://github.com/your-username/code-sync.git](https://github.com/Ashutoshporwal-ashu/code-sync.git)
+cd code-sync
