@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Background from '../components/Background';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -89,8 +90,13 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-4 selection:bg-accent/30 selection:text-white">
-            <div className="bg-[#0a0a0a] rounded-3xl shadow-2xl flex max-w-4xl w-full overflow-hidden border border-gray-800 min-h-[600px] animate-in fade-in zoom-in duration-300">
+        <div className="min-h-screen bg-[#020202] flex items-center justify-center p-4 relative overflow-hidden selection:bg-accent/30 selection:text-white">
+            
+            {/* ✨ JADOO (Background) YAHAN LAGA HAI */}
+            <Background />
+
+            {/* z-10 taaki card upar dikhe */}
+            <div className="bg-[#0a0a0a] rounded-3xl shadow-2xl flex max-w-4xl w-full overflow-hidden border border-gray-800 min-h-[600px] animate-in fade-in zoom-in duration-300 relative z-10">
                 
                 {/* 📝 LEFT SIDE: FORM */}
                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative">

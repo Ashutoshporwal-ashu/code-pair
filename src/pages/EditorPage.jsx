@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React, { useState, useRef, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import Client from '../components/Client';
@@ -177,7 +178,7 @@ const EditorPage = () => {
         };
         
         try {
-            const response = await fetch('https://emkc.org/api/v2/piston/execute', {
+            const response = await fetch('/api/v2/execute', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -408,7 +409,12 @@ const EditorPage = () => {
     );
 
     return (
-        <div className="h-screen bg-black text-white flex overflow-hidden selection:bg-accent/30 selection:text-white">
+    <motion.div 
+        initial={{ opacity: 0, scale: 0.98 }} 
+        animate={{ opacity: 1, scale: 1 }} 
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="h-screen bg-black text-white flex overflow-hidden selection:bg-accent/30 selection:text-white"
+    >
             
             {/* Splitter for Sidebar & Editor (Desktop) */}
             {isMobile ? (
@@ -540,7 +546,7 @@ const EditorPage = () => {
                     </div>
                 </div>
             )}
-        </div>
+        </motion.div>
     );
 };
 

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast';
 import { useNavigate, Link } from 'react-router-dom';
+import Typewriter from 'typewriter-effect';
+// Apne naye Background component ko import kiya hai
+import Background from '../components/Background';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -12,49 +15,6 @@ const Home = () => {
     // Auth State
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [storedUser, setStoredUser] = useState('');
-
-    // ✨ TYPING ANIMATION STATE
-    const [typingText, setTypingText] = useState('');
-    const [isDeleting, setIsDeleting] = useState(false);
-    const fullText = "Code. Sync. Ship.";
-    const typingSpeed = 150; // Typing speed (ms)
-    const deletingSpeed = 100; // Backspace speed (ms)
-    const pauseTime = 2000; // Pause before deleting (ms)
-
-    // ✨ TYPING EFFECT LOGIC
-    useEffect(() => {
-        let timer;
-        const handleTyping = () => {
-            if (!isDeleting) {
-                // Typing...
-                if (typingText.length < fullText.length) {
-                    setTypingText(fullText.slice(0, typingText.length + 1));
-                    timer = setTimeout(handleTyping, typingSpeed);
-                } else {
-                    // Finished typing, wait before deleting
-                    timer = setTimeout(() => {
-                        setIsDeleting(true);
-                        handleTyping();
-                    }, pauseTime);
-                }
-            } else {
-                // Deleting...
-                if (typingText.length > 0) {
-                    setTypingText(fullText.slice(0, typingText.length - 1));
-                    timer = setTimeout(handleTyping, deletingSpeed);
-                } else {
-                    // Finished deleting, start typing again
-                    setIsDeleting(false);
-                    timer = setTimeout(handleTyping, typingSpeed);
-                }
-            }
-        };
-
-        // Start the loop
-        timer = setTimeout(handleTyping, typingSpeed);
-
-        return () => clearTimeout(timer);
-    }, [typingText, isDeleting]); // Dependencies ensure loop continues
 
     useEffect(() => {
         const user = localStorage.getItem('username');
@@ -117,8 +77,11 @@ const Home = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
+        <div className="min-h-screen bg-[#020202] flex items-center justify-center p-4 relative overflow-hidden">
             
+            {/* ✨ YAHAN LAGA HAI APNA MAGIC BACKGROUND COMPONENT */}
+            <Background />
+
             {/* TOP NAVIGATION BAR */}
             <nav className="absolute top-0 left-0 w-full p-6 flex justify-between items-center z-30">
                 <div className="hidden md:flex items-center gap-2">
@@ -232,19 +195,27 @@ const Home = () => {
                         }}>
                     </div>
 
-                    <div className="absolute top-10 left-10 w-24 h-24 bg-green-500 rounded-full blur-[60px] opacity-20 animate-pulse"></div>
-                    <div className="absolute bottom-10 right-10 w-32 h-32 bg-purple-600 rounded-full blur-[60px] opacity-20 animate-pulse"></div>
-
                     <div className="relative z-10 flex flex-col items-center text-center p-10">
                         <div className="w-24 h-24 mb-6 bg-gradient-to-br from-gray-800 to-black border border-gray-700 rounded-2xl flex items-center justify-center shadow-2xl transform rotate-3 hover:rotate-0 transition-all duration-500 group">
                             <span className="text-5xl group-hover:scale-110 transition-transform">💻</span>
                         </div>
                         
-                        {/* ✨ HERE IS THE TYPING EFFECT */}
-                        <h2 className="text-3xl font-bold text-white mb-3 min-h-[40px]">
-                            {typingText}
-                            {/* Blinking Cursor */}
-                            <span className="text-accent animate-pulse">|</span>
+                        {/* ✨ PREMIUM TYPEWRITER EFFECT */}
+                        <h2 className="text-3xl font-bold mb-3 min-h-[80px] glowing-gradient-text flex items-center justify-center">
+                            <Typewriter
+                                options={{
+                                    strings: [
+                                        'Code Together...',
+                                        'Build Faster...',
+                                        'Crack FAANG...',
+                                        'Code. Sync. Ship.'
+                                    ],
+                                    autoStart: true,
+                                    loop: true,
+                                    delay: 75,
+                                    deleteSpeed: 50,
+                                }}
+                            />
                         </h2>
 
                         <p className="text-gray-400 text-sm max-w-xs leading-relaxed">
@@ -252,9 +223,9 @@ const Home = () => {
                         </p>
                         
                         <div className="mt-8 flex gap-2">
-                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono">JS</span>
-                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono">C++</span>
-                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono">Python</span>
+                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono shadow-[0_0_10px_rgba(255,255,255,0.05)]">JS</span>
+                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono shadow-[0_0_10px_rgba(255,255,255,0.05)]">C++</span>
+                             <span className="bg-gray-900 border border-gray-700 text-gray-300 text-[10px] px-3 py-1 rounded-full font-mono shadow-[0_0_10px_rgba(255,255,255,0.05)]">Python</span>
                         </div>
                     </div>
                 </div>

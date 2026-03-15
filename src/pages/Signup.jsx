@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import Background from '../components/Background';
 
 const Signup = () => {
     const navigate = useNavigate();
@@ -84,9 +85,13 @@ const Signup = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center p-4 selection:bg-purple-500/30">
+        <div className="min-h-screen bg-[#020202] flex items-center justify-center p-4 relative overflow-hidden selection:bg-purple-500/30">
+            
+            {/* ✨ JADOO (Background) YAHAN BHI LAGA HAI */}
+            <Background />
+
             {/* Split layout: Login design logic flipped (Design Left, Form Right) */}
-            <div className="bg-[#0a0a0a] rounded-3xl shadow-2xl flex flex-row-reverse max-w-4xl w-full overflow-hidden border border-gray-800 min-h-[600px] animate-in fade-in zoom-in duration-300">
+            <div className="bg-[#0a0a0a] rounded-3xl shadow-2xl flex flex-row-reverse max-w-4xl w-full overflow-hidden border border-gray-800 min-h-[600px] animate-in fade-in zoom-in duration-300 relative z-10">
                 
                 {/* 📝 RIGHT SIDE: FORM */}
                 <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center relative z-10 bg-[#0a0a0a]">

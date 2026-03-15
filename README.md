@@ -49,5 +49,5 @@ Want to test it out on your own machine? Follow these steps:
 
 **1. Clone the repository:**
 ```bash
-git clone [https://github.com/your-username/code-sync.git](https://github.com/Ashutoshporwal-ashu/code-sync.git)
+git clone [https://github.com/your-username/code-sync.git](https://github.com/Ashutoshporwal-ashu/code-pair)
 cd code-sync
