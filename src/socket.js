@@ -8,5 +8,5 @@ export const initSocket = async () => {
         transports: ['websocket'],
     };
     // Backend ka URL (Port 5000)
-    return io('http://localhost:5000', options);
+    return io('https://code-pair-d9hg.onrender.com', options);
 };
